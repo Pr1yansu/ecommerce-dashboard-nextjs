@@ -34,9 +34,9 @@ export const CellActions: React.FC<Props> = ({ data }) => {
     try {
       setLoading(true);
       await axios.delete(`/api/${params.storeId}/categories/${data.id}`);
-      router.refresh();
+      location.reload();
       router.push(`/${params.storeId}/categories`);
-      toast.success("Category Deleted Successfully");
+      toast.success("Category Deleted Successfully please refresh the page");
     } catch (error: any) {
       toast.error("Something went wrong, please try again or contact support");
     } finally {
@@ -71,7 +71,7 @@ export const CellActions: React.FC<Props> = ({ data }) => {
           </DropdownMenuItem>
           <DropdownMenuItem
             onClick={() => {
-              router.push(`/${params.storeId}/category/${data.id}`);
+              router.push(`/${params.storeId}/categories/${data.id}`);
             }}
           >
             <AiFillEdit className="w-4 h-4 mr-2" />

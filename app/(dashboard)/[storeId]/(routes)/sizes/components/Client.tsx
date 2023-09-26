@@ -8,13 +8,13 @@ import { useParams, useRouter } from "next/navigation";
 
 import { DataTable } from "@/components/ui/data-table";
 import ApiList from "@/components/ui/ApiList";
-import { CategoryColumn, columns } from "../[categoriesId]/components/columns";
+import { SizesColumn, columns } from "../[sizeId]/components/columns";
 
 interface Props {
-  data: CategoryColumn[];
+  data: SizesColumn[];
 }
 
-const CategoryClient: React.FC<Props> = ({ data }) => {
+const SizesClient: React.FC<Props> = ({ data }) => {
   const router = useRouter();
   const params = useParams();
 
@@ -22,13 +22,16 @@ const CategoryClient: React.FC<Props> = ({ data }) => {
     <>
       <div className="flex items-baseline justify-between">
         <Heading
-          title={`Categories (${data.length})`}
-          description="Categories are used to group products together."
+          title={`Sizes (${data.length})`}
+          description="
+            Sizes are used to define the size of the product. For example, if you are selling
+            T-shirts, you can add sizes like S, M, L, XL, XXL, etc.
+          "
         />
         <Button
           className="w-[150px]"
           onClick={() => {
-            router.push(`/${params.storeId}/categories/new`);
+            router.push(`/${params.storeId}/sizes/new`);
           }}
         >
           <PlusIcon className="mr-2 h-4 w-4" />
@@ -39,9 +42,9 @@ const CategoryClient: React.FC<Props> = ({ data }) => {
       <DataTable columns={columns} data={data} searchKey="name" />
       <Separator className="my-2" />
       <Heading title="Api" description="Api Calls for Categories" />
-      <ApiList entityIdName="categoriesId" entityName="categories" />
+      <ApiList entityIdName="sizeId" entityName="sizes" />
     </>
   );
 };
 
-export default CategoryClient;
+export default SizesClient;

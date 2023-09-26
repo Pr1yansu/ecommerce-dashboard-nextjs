@@ -8,13 +8,13 @@ import { useParams, useRouter } from "next/navigation";
 
 import { DataTable } from "@/components/ui/data-table";
 import ApiList from "@/components/ui/ApiList";
-import { CategoryColumn, columns } from "../[categoriesId]/components/columns";
+import { ColorsColumn, columns } from "../[colorId]/components/columns";
 
 interface Props {
-  data: CategoryColumn[];
+  data: ColorsColumn[];
 }
 
-const CategoryClient: React.FC<Props> = ({ data }) => {
+const ColorsClient: React.FC<Props> = ({ data }) => {
   const router = useRouter();
   const params = useParams();
 
@@ -22,13 +22,15 @@ const CategoryClient: React.FC<Props> = ({ data }) => {
     <>
       <div className="flex items-baseline justify-between">
         <Heading
-          title={`Categories (${data.length})`}
-          description="Categories are used to group products together."
+          title={`Colors (${data.length})`}
+          description="
+            Colors are used to categorize your products. 
+          "
         />
         <Button
           className="w-[150px]"
           onClick={() => {
-            router.push(`/${params.storeId}/categories/new`);
+            router.push(`/${params.storeId}/colors/new`);
           }}
         >
           <PlusIcon className="mr-2 h-4 w-4" />
@@ -38,10 +40,10 @@ const CategoryClient: React.FC<Props> = ({ data }) => {
       <Separator className="my-2" />
       <DataTable columns={columns} data={data} searchKey="name" />
       <Separator className="my-2" />
-      <Heading title="Api" description="Api Calls for Categories" />
-      <ApiList entityIdName="categoriesId" entityName="categories" />
+      <Heading title="Api" description="Api Calls for Colors" />
+      <ApiList entityIdName="colorId" entityName="colors" />
     </>
   );
 };
 
-export default CategoryClient;
+export default ColorsClient;

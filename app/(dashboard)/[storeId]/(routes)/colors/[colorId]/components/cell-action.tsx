@@ -2,7 +2,7 @@
 import { Button } from "@/components/ui/button";
 import { AiFillEdit } from "react-icons/ai";
 import { MdDeleteSweep } from "react-icons/md";
-import { BillboardColumn } from "./columns";
+import { ColorsColumn } from "./columns";
 import { BiCopy } from "react-icons/bi";
 import React, { useState } from "react";
 import {
@@ -18,7 +18,7 @@ import axios from "axios";
 import { AlertModal } from "@/components/modals/alert-modals";
 
 interface Props {
-  data: BillboardColumn;
+  data: ColorsColumn;
 }
 
 export const CellActions: React.FC<Props> = ({ data }) => {
@@ -33,14 +33,13 @@ export const CellActions: React.FC<Props> = ({ data }) => {
   const onDelete = async () => {
     try {
       setLoading(true);
-      await axios.delete(`/api/${params.storeId}/billboards/${data.id}`);
+      await axios.delete(`/api/${params.storeId}/colors/${data.id}`);
       location.reload();
-      router.push(`/${params.storeId}/billboard`);
-      toast.success("Billboard Deleted Successfully");
+      router.refresh();
+      router.push(`/${params.storeId}/colors`);
+      toast.success("Size Deleted Successfully");
     } catch (error: any) {
-      toast.error(
-        "Make sure you have removed all categories and products from this billboard"
-      );
+      toast.error("Something went wrong, please try again or contact support");
     } finally {
       setLoading(false);
       setOpen(false);
@@ -73,7 +72,7 @@ export const CellActions: React.FC<Props> = ({ data }) => {
           </DropdownMenuItem>
           <DropdownMenuItem
             onClick={() => {
-              router.push(`/${params.storeId}/billboard/${data.id}`);
+              router.push(`/${params.storeId}/colors/${data.id}`);
             }}
           >
             <AiFillEdit className="w-4 h-4 mr-2" />

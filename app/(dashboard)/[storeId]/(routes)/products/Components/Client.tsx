@@ -5,16 +5,15 @@ import { Button } from "@/components/ui/button";
 import { PlusIcon } from "@radix-ui/react-icons";
 import { Separator } from "@/components/ui/separator";
 import { useParams, useRouter } from "next/navigation";
-
 import { DataTable } from "@/components/ui/data-table";
 import ApiList from "@/components/ui/ApiList";
-import { CategoryColumn, columns } from "../[categoriesId]/components/columns";
+import { ProductColumn, columns } from "../[productId]/components/columns";
 
 interface Props {
-  data: CategoryColumn[];
+  data: ProductColumn[];
 }
 
-const CategoryClient: React.FC<Props> = ({ data }) => {
+const ProductClient: React.FC<Props> = ({ data }) => {
   const router = useRouter();
   const params = useParams();
 
@@ -22,13 +21,15 @@ const CategoryClient: React.FC<Props> = ({ data }) => {
     <>
       <div className="flex items-baseline justify-between">
         <Heading
-          title={`Categories (${data.length})`}
-          description="Categories are used to group products together."
+          title={`Products (${data.length})`}
+          description="
+            Manage your products here. You can add, edit, delete and archive products.
+          "
         />
         <Button
           className="w-[150px]"
           onClick={() => {
-            router.push(`/${params.storeId}/categories/new`);
+            router.push(`/${params.storeId}/products/new`);
           }}
         >
           <PlusIcon className="mr-2 h-4 w-4" />
@@ -38,10 +39,10 @@ const CategoryClient: React.FC<Props> = ({ data }) => {
       <Separator className="my-2" />
       <DataTable columns={columns} data={data} searchKey="name" />
       <Separator className="my-2" />
-      <Heading title="Api" description="Api Calls for Categories" />
-      <ApiList entityIdName="categoriesId" entityName="categories" />
+      <Heading title="Api" description="Api Calls for Products" />
+      <ApiList entityIdName="productId" entityName="products" />
     </>
   );
 };
 
-export default CategoryClient;
+export default ProductClient;

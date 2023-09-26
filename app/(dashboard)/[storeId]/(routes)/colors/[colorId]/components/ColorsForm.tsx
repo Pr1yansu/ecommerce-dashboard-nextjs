@@ -1,5 +1,5 @@
 "use client";
-import { Billboard, Category } from "@prisma/client";
+import { Colors } from "@prisma/client";
 import React, { useState } from "react";
 import Heading from "@/components/ui/Heading";
 import { Button } from "@/components/ui/button";
@@ -20,43 +20,35 @@ import toast from "react-hot-toast";
 import axios from "axios";
 import { useParams, useRouter } from "next/navigation";
 import { AlertModal } from "@/components/modals/alert-modals";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
 
 interface Props {
-  initialData: Category | null;
-  billboards: Billboard[];
+  initialData: Colors | null;
 }
 
 const formSchema = z.object({
   name: z.string().min(1),
-  billboardId: z.string().min(1),
+  value: z.string().min(3).regex(/^#/, "Must be a valid hex color"),
 });
 
 type FormValues = z.infer<typeof formSchema>;
 
-const CategoryForm: React.FC<Props> = ({ initialData, billboards }) => {
+const ColorsForm: React.FC<Props> = ({ initialData }) => {
   const router = useRouter();
   const params = useParams();
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
-  const title = initialData ? "Edit Category" : "Add Category";
-  const description = initialData ? "Edit a Category" : "Add a new Category";
+  const title = initialData ? "Edit Color" : "Add Color";
+  const description = initialData ? "Edit a Color" : "Add a new Color";
   const toastMessage = initialData
-    ? "Category Updated Successfully"
-    : "Category Added Successfully";
+    ? "Color Updated Successfully"
+    : "Color Added Successfully";
   const action = initialData ? "Save" : "Add";
 
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
     defaultValues: initialData || {
       name: "",
-      billboardId: "",
+      value: "",
     },
   });
 
@@ -65,14 +57,14 @@ const CategoryForm: React.FC<Props> = ({ initialData, billboards }) => {
       setLoading(true);
       if (initialData) {
         await axios.patch(
-          `/api/${params.storeId}/categories/${params.categoriesId}`,
+          `/api/${params.storeId}/colors/${params.colorId}`,
           values
         );
       } else {
-        await axios.post(`/api/${params.storeId}/categories`, values);
+        await axios.post(`/api/${params.storeId}/colors`, values);
       }
       router.refresh();
-      router.push(`/${params.storeId}/categories`);
+      router.push(`/${params.storeId}/colors`);
       toast.success(toastMessage);
     } catch (error: any) {
       console.log(error);
@@ -87,14 +79,14 @@ const CategoryForm: React.FC<Props> = ({ initialData, billboards }) => {
   const onDelete = async () => {
     try {
       setLoading(true);
-      await axios.delete(
-        `/api/${params.storeId}/categories/${params.categoriesId}`
-      );
+      await axios.delete(`/api/${params.storeId}/colors/${params.colorId}`);
       location.reload();
-      router.push(`/${params.storeId}/categories`);
-      toast.success("Category Deleted Successfully Please refresh the page");
+      router.push(`/${params.storeId}/colors`);
+      toast.success("Color Deleted Successfully");
     } catch (error: any) {
-      toast.error("Something went wrong, please try again or contact support");
+      toast.error(
+        "Something went wrong make sure you removed all the products for this color"
+      );
     } finally {
       setLoading(false);
       setOpen(false);
@@ -134,7 +126,7 @@ const CategoryForm: React.FC<Props> = ({ initialData, billboards }) => {
               name="name"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>name</FormLabel>
+                  <FormLabel>Color Name</FormLabel>
                   <FormControl>
                     <Input
                       {...field}
@@ -147,33 +139,22 @@ const CategoryForm: React.FC<Props> = ({ initialData, billboards }) => {
             />
             <FormField
               control={form.control}
-              name="billboardId"
+              name="value"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Billboard ID</FormLabel>
+                  <FormLabel>Color value</FormLabel>
                   <FormControl>
-                    <Select
-                      disabled={loading}
-                      onValueChange={field.onChange}
-                      value={field.value}
-                      defaultValue={field.value}
-                    >
-                      <FormControl>
-                        <SelectTrigger>
-                          <SelectValue
-                            placeholder="Select Billboard ID ..."
-                            defaultValue={field.value}
-                          />
-                        </SelectTrigger>
-                      </FormControl>
-                      <SelectContent>
-                        {billboards.map((billboard, i) => (
-                          <SelectItem key={i} value={billboard.id}>
-                            {billboard.label}
-                          </SelectItem>
-                        ))}
-                      </SelectContent>
-                    </Select>
+                    <div className="flex gap-x-2 items-center">
+                      <Input
+                        {...field}
+                        placeholder="Value ..."
+                        disabled={loading}
+                      />
+                      <div
+                        className="rounded-full p-4 border"
+                        style={{ backgroundColor: field.value }}
+                      />
+                    </div>
                   </FormControl>
                 </FormItem>
               )}
@@ -195,4 +176,4 @@ const CategoryForm: React.FC<Props> = ({ initialData, billboards }) => {
   );
 };
 
-export default CategoryForm;
+export default ColorsForm;

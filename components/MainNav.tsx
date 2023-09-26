@@ -17,11 +17,7 @@ const MainNav = ({
       label: "Dashboard",
       active: pathName === `/${params.storeId}`,
     },
-    {
-      href: `/${params.storeId}/settings`,
-      label: "Settings",
-      active: pathName === `/${params.storeId}/settings`,
-    },
+
     {
       href: `/${params.storeId}/billboard`,
       label: "Billboard",
@@ -30,17 +26,27 @@ const MainNav = ({
     {
       href: `/${params.storeId}/categories`,
       label: "Categories",
+      active: pathName === `/${params.storeId}/categories`,
+    },
+    {
+      href: `/${params.storeId}/sizes`,
+      label: "Sizes",
+      active: pathName === `/${params.storeId}/sizes`,
+    },
+    {
+      href: `/${params.storeId}/colors`,
+      label: "Colors",
+      active: pathName === `/${params.storeId}/colors`,
+    },
+    {
+      href: `/${params.storeId}/products`,
+      label: "Products",
       active: pathName === `/${params.storeId}/products`,
     },
     {
-      href: `/${params.storeId}/orders`,
-      label: "Orders",
-      active: pathName === `/${params.storeId}/orders`,
-    },
-    {
-      href: `/${params.storeId}/customers`,
-      label: "Customers",
-      active: pathName === `/${params.storeId}/customers`,
+      href: `/${params.storeId}/settings`,
+      label: "Settings",
+      active: pathName === `/${params.storeId}/settings`,
     },
   ];
   return (

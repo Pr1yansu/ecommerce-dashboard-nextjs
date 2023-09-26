@@ -2,7 +2,7 @@
 import { Button } from "@/components/ui/button";
 import { AiFillEdit } from "react-icons/ai";
 import { MdDeleteSweep } from "react-icons/md";
-import { BillboardColumn } from "./columns";
+import { ProductColumn } from "./columns";
 import { BiCopy } from "react-icons/bi";
 import React, { useState } from "react";
 import {
@@ -18,7 +18,7 @@ import axios from "axios";
 import { AlertModal } from "@/components/modals/alert-modals";
 
 interface Props {
-  data: BillboardColumn;
+  data: ProductColumn;
 }
 
 export const CellActions: React.FC<Props> = ({ data }) => {

@@ -184,10 +184,17 @@ export async function GET(
       where: {
         id: productId,
       },
+      include: {
+        images: true,
+        category: true,
+        color: true,
+        size: true,
+        store: true,
+      },
     });
 
     if (!product) {
-      return new NextResponse("Billboard Not exists", { status: 400 });
+      return new NextResponse("Product Not exists", { status: 400 });
     }
 
     return NextResponse.json(product);

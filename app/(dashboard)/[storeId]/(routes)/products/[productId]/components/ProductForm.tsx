@@ -33,9 +33,9 @@ import { Checkbox } from "@/components/ui/checkbox";
 
 interface Props {
   initialData:
-    Product & {
+    | (Product & {
         images: Images[];
-      }
+      })
     | null;
   categories: Category[];
   sizes: Size[];
@@ -365,7 +365,7 @@ const ProductForm: React.FC<Props> = ({
                     />
                   </FormControl>
                   <div className="space-y-1 leading-none">
-                    <FormLabel>Featured</FormLabel>
+                    <FormLabel>Archived</FormLabel>
                     <FormDescription>
                       This Product Will not appear on any page
                     </FormDescription>
@@ -375,21 +375,21 @@ const ProductForm: React.FC<Props> = ({
             />
           </div>
           <FormField
-              control={form.control}
-              name="description"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Description</FormLabel>
-                  <FormControl>
-                    <Input
-                      {...field}
-                      placeholder="Description :"
-                      disabled={loading}
-                    />
-                  </FormControl>
-                </FormItem>
-              )}
-            />
+            control={form.control}
+            name="description"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Description</FormLabel>
+                <FormControl>
+                  <Input
+                    {...field}
+                    placeholder="Description :"
+                    disabled={loading}
+                  />
+                </FormControl>
+              </FormItem>
+            )}
+          />
           <div className="w-full flex justify-end">
             <Button type="submit" disabled={loading} variant={"default"}>
               {action}

@@ -39,6 +39,7 @@ export const CellActions: React.FC<Props> = ({ data }) => {
       toast.success("Category Deleted Successfully please refresh the page");
     } catch (error: any) {
       toast.error("Something went wrong, please try again or contact support");
+      location.reload();
     } finally {
       setLoading(false);
       setOpen(false);

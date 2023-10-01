@@ -33,17 +33,19 @@ export const CellActions: React.FC<Props> = ({ data }) => {
   const onDelete = async () => {
     try {
       setLoading(true);
-      await axios.delete(`/api/${params.storeId}/billboards/${data.id}`);
+      await axios.delete(`/api/${params.storeId}/products/${data.id}`);
       location.reload();
-      router.push(`/${params.storeId}/billboard`);
-      toast.success("Billboard Deleted Successfully");
+      router.push(`/${params.storeId}/products`);
+      toast.success("Product Deleted Successfully");
     } catch (error: any) {
       toast.error(
-        "Make sure you have removed all categories and products from this billboard"
+        "Product will be removed parmanently"
       );
+      location.reload();
     } finally {
       setLoading(false);
       setOpen(false);
+      router.refresh();
     }
   };
   return (
@@ -73,7 +75,7 @@ export const CellActions: React.FC<Props> = ({ data }) => {
           </DropdownMenuItem>
           <DropdownMenuItem
             onClick={() => {
-              router.push(`/${params.storeId}/billboard/${data.id}`);
+              router.push(`/${params.storeId}/products/${data.id}`);
             }}
           >
             <AiFillEdit className="w-4 h-4 mr-2" />

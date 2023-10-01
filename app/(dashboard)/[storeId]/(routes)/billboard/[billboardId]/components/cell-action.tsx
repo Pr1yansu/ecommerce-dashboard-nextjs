@@ -41,6 +41,7 @@ export const CellActions: React.FC<Props> = ({ data }) => {
       toast.error(
         "Make sure you have removed all categories and products from this billboard"
       );
+      location.reload()
     } finally {
       setLoading(false);
       setOpen(false);

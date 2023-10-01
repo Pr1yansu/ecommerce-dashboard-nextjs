@@ -132,6 +132,9 @@ export async function GET(
       where: {
         id: categoriesId,
       },
+      include: {
+        billboard: true,
+      },
     });
 
     if (!category) {

@@ -64,7 +64,7 @@ export async function PATCH(
     return NextResponse.json(billboard);
   } catch (error) {
     console.log("[BILLBOARD_PATCH]", error);
-    return new NextResponse("Internal Server Error", { status: 500 });
+    return NextResponse.json(error, { status: 500 });
   }
 }
 
@@ -141,6 +141,6 @@ export async function GET(
     return NextResponse.json(billboard);
   } catch (error) {
     console.log("[BILLBOARD_GET]", error);
-    return new NextResponse("Internal Server Error", { status: 500 });
+    return NextResponse.json(error, { status: 500 });
   }
 }

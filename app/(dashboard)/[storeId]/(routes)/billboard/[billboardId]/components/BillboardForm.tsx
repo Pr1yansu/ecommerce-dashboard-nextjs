@@ -56,6 +56,7 @@ const BillBoardForm: React.FC<Props> = ({ initialData }) => {
   const onSubmit = async (values: FormValues) => {
     try {
       setLoading(true);
+      console.log(initialData);
       if (initialData) {
         await axios.patch(
           `/api/${params.storeId}/billboards/${params.billboardId}`,
@@ -69,7 +70,6 @@ const BillBoardForm: React.FC<Props> = ({ initialData }) => {
       toast.success(toastMessage);
     } catch (error: any) {
       console.log(error);
-
       toast.error("Something went wrong");
     } finally {
       setLoading(false);

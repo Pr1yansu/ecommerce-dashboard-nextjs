@@ -126,8 +126,6 @@ export async function GET(
   try {
     const { billboardId } = params;
 
-    console.log(billboardId);
-
     if (!billboardId) {
       return new NextResponse("Billboard Id not Found", { status: 400 });
     }
@@ -137,8 +135,6 @@ export async function GET(
         id: billboardId,
       },
     });
-
-    console.log(billboard);
 
     if (!billboard) {
       return new NextResponse("Billboard Not exists", { status: 400 });

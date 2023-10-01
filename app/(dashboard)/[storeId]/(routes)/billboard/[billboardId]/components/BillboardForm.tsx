@@ -56,15 +56,26 @@ const BillBoardForm: React.FC<Props> = ({ initialData }) => {
   const onSubmit = async (values: FormValues) => {
     try {
       setLoading(true);
-      console.log(initialData);
+      console.log(params.billboardId);
+      console.log(
+        `/api/${params.storeId}/billboards/${params.billboardId}`,
+        values
+      );
+
       if (initialData) {
-        await axios.patch(
+        const res = await axios.patch(
           `/api/${params.storeId}/billboards/${params.billboardId}`,
           values
         );
+        console.log(res);
       } else {
-        await axios.post(`/api/${params.storeId}/billboards`, values);
+        const res = await axios.post(
+          `/api/${params.storeId}/billboards`,
+          values
+        );
+        console.log(res);
       }
+
       router.refresh();
       router.push(`/${params.storeId}/billboard`);
       toast.success(toastMessage);

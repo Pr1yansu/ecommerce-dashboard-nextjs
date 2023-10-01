@@ -7,12 +7,24 @@ const SingleCategory = async ({
 }: {
   params: { categoriesId: string; storeId: string };
 }) => {
-  const Category = await prisma.category.findUnique({
-    where: { id: params.categoriesId },
-  });
   const billboards = await prisma.billboard.findMany({
     where: { storeId: params.storeId },
   });
+
+  if (params.categoriesId === "new") {
+    return (
+      <div className="flex-col">
+        <div className="flex-1 space-y-4 p-8 pt-6">
+          <CategoryForm billboards={billboards} initialData={null} />
+        </div>
+      </div>
+    );
+  }
+
+  const Category = await prisma.category.findUnique({
+    where: { id: params.categoriesId },
+  });
+
   return (
     <div className="flex-col">
       <div className="flex-1 space-y-4 p-8 pt-6">

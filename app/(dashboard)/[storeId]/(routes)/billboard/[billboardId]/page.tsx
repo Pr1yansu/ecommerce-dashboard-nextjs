@@ -7,6 +7,15 @@ const SingleBillboard = async ({
 }: {
   params: { billboardId: string };
 }) => {
+  if (params.billboardId === "new") {
+    return (
+      <div className="flex-col">
+        <div className="flex-1 space-y-4 p-8 pt-6">
+          <BillBoardForm initialData={null} />
+        </div>
+      </div>
+    );
+  }
   const Billboard = await prisma.billboard.findUnique({
     where: { id: params.billboardId },
   });

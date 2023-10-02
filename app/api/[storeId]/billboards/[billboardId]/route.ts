@@ -63,7 +63,13 @@ export async function PATCH(
     return NextResponse.json(billboard);
   } catch (error) {
     console.log("[BILLBOARD_PATCH]", error);
-    return new NextResponse("Internal Server Error", { status: 500 });
+    return NextResponse.json(
+      {
+        massege: "Internal Server Error",
+        error,
+      },
+      { status: 500 }
+    );
   }
 }
 

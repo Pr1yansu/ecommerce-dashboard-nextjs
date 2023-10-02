@@ -1,5 +1,6 @@
 import { auth } from "@clerk/nextjs";
 import { NextResponse } from "next/server";
+import prisma from "@/lib/prismadb";
 
 export async function PATCH(
   req: Request,
@@ -16,7 +17,7 @@ export async function PATCH(
     const { userId } = auth();
     const body = await req.json();
     const { label, imageUrl } = body;
-    const { billboardId } = params;
+    const billboardId = await params.billboardId;
 
     if (!userId) {
       return new NextResponse("Unauthenticated", { status: 401 });

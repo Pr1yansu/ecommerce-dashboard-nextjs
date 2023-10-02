@@ -1,3 +1,4 @@
+"use client";
 import { auth } from "@clerk/nextjs";
 import { NextResponse } from "next/server";
 
@@ -16,6 +17,8 @@ export async function PATCH(
     const { userId } = auth();
     const body = await req.json();
     const { label, imageUrl } = body;
+    const url = new URL(req.url);
+    const billboardId = url.pathname.split("/").pop();
 
     if (!userId) {
       return new NextResponse("Unauthenticated", { status: 401 });
@@ -35,7 +38,7 @@ export async function PATCH(
       return new NextResponse("Store Id not Found", { status: 400 });
     }
 
-    if (!params.billboardId) {
+    if (!billboardId) {
       return new NextResponse("Billboard Id not Found", { status: 400 });
     }
 
@@ -53,7 +56,7 @@ export async function PATCH(
 
     const billboard = await prisma?.billboard.updateMany({
       where: {
-        id: params.billboardId,
+        id: billboardId,
       },
       data: {
         label,

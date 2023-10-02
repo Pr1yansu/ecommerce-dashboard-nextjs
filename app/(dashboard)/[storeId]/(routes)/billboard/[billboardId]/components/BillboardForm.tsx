@@ -62,21 +62,28 @@ const BillBoardForm: React.FC<Props> = ({ initialData }) => {
         values
       );
 
-      if (initialData) {
-        const res = await axios.patch(
-          `/api/${params.storeId}/billboards/${params.billboardId}`,
-          values
-        );
-        console.log("res patch");
-        console.log(res);
-      } else {
-        const res = await axios.post(
-          `/api/${params.storeId}/billboards`,
-          values
-        );
-        console.log("res post");
-        console.log(res);
-      }
+      const res = await axios.patch(
+        `/api/${params.storeId}/billboards/${params.billboardId}`,
+        values
+      );
+      console.log("res patch");
+      console.log(res);
+
+      // if (initialData) {
+      //   const res = await axios.patch(
+      //     `/api/${params.storeId}/billboards/${params.billboardId}`,
+      //     values
+      //   );
+      //   console.log("res patch");
+      //   console.log(res);
+      // } else {
+      //   const res = await axios.post(
+      //     `/api/${params.storeId}/billboards`,
+      //     values
+      //   );
+      //   console.log("res post");
+      //   console.log(res);
+      // }
 
       router.refresh();
       router.push(`/${params.storeId}/billboard`);

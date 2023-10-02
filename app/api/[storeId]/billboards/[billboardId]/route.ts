@@ -30,13 +30,12 @@ export async function PATCH(
     }
 
     const { storeId } = params;
-    const billboardId = await params.billboardId;
 
     if (!storeId) {
       return new NextResponse("Store Id not Found", { status: 400 });
     }
 
-    if (!billboardId) {
+    if (!params.billboardId) {
       return new NextResponse("Billboard Id not Found", { status: 400 });
     }
 
@@ -50,9 +49,11 @@ export async function PATCH(
       return new NextResponse("Unauthorized", { status: 400 });
     }
 
+    NextResponse.json("Everything is fine");
+
     const billboard = await prisma?.billboard.updateMany({
       where: {
-        id: billboardId,
+        id: params.billboardId,
       },
       data: {
         label,
@@ -63,13 +64,7 @@ export async function PATCH(
     return NextResponse.json(billboard);
   } catch (error) {
     console.log("[BILLBOARD_PATCH]", error);
-    return NextResponse.json(
-      {
-        massege: "Internal Server Error",
-        error,
-      },
-      { status: 500 }
-    );
+    return new NextResponse("Internal Server Error", { status: 500 });
   }
 }
 

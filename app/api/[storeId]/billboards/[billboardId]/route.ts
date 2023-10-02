@@ -15,9 +15,6 @@ export async function PATCH(
   try {
     const { userId } = auth();
     const body = await req.json();
-
-    console.log(params.billboardId);
-
     const { label, imageUrl } = body;
 
     if (!userId) {
@@ -33,7 +30,7 @@ export async function PATCH(
     }
 
     const { storeId } = params;
-    const { billboardId } = params;
+    const billboardId = await params.billboardId;
 
     if (!storeId) {
       return new NextResponse("Store Id not Found", { status: 400 });
@@ -82,7 +79,7 @@ export async function DELETE(
     }
 
     const { storeId } = params;
-    const { billboardId } = params;
+    const billboardId = await params.billboardId;
 
     if (!storeId) {
       return new NextResponse("Store Id Found", { status: 400 });
@@ -124,7 +121,9 @@ export async function GET(
   { params }: { params: { billboardId: string } }
 ) {
   try {
-    const { billboardId } = params;
+    console.log();
+
+    const billboardId = await params.billboardId;
 
     if (!billboardId) {
       return new NextResponse("Billboard Id not Found", { status: 400 });

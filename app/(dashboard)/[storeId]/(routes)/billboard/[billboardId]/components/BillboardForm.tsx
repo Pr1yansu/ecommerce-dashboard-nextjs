@@ -67,12 +67,14 @@ const BillBoardForm: React.FC<Props> = ({ initialData }) => {
           `/api/${params.storeId}/billboards/${params.billboardId}`,
           values
         );
+        console.log("res patch");
         console.log(res);
       } else {
         const res = await axios.post(
           `/api/${params.storeId}/billboards`,
           values
         );
+        console.log("res post");
         console.log(res);
       }
 

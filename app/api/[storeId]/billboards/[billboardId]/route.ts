@@ -17,8 +17,7 @@ export async function PATCH(
     const { userId } = auth();
     const body = await req.json();
     const { label, imageUrl } = body;
-    const url = new URL(req.url);
-    const billboardId = url.pathname.split("/").pop();
+    const { billboardId } = params;
 
     if (!userId) {
       return new NextResponse("Unauthenticated", { status: 401 });

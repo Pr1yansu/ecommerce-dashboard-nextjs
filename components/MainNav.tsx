@@ -6,8 +6,12 @@ import React from "react";
 
 const MainNav = ({
   className,
+  setShow,
   ...props
-}: React.HtmlHTMLAttributes<HTMLElement>) => {
+}: {
+  className: React.HtmlHTMLAttributes<HTMLElement> | string;
+  setShow: React.Dispatch<React.SetStateAction<boolean>>;
+}) => {
   const pathName = usePathname();
   const params = useParams();
 
@@ -55,15 +59,25 @@ const MainNav = ({
     },
   ];
   return (
-    <ul className={cn("flex items-center space-x-4 lg:space-x-6", className)}>
+    <ul
+      className={cn(
+        "flex items-center max-lg:gap-4 max-lg:justify-center  lg:space-x-6",
+        className
+      )}
+    >
       {routes.map((route) => (
         <Link
           href={route.href}
           key={route.href}
           className={cn(
-            "text-sm font-medium text-gray-900 hover:text-gray-700 duration-200 transition-colors",
+            "max-lg:text-lg text-sm font-medium text-gray-900 hover:text-gray-700 duration-200 transition-colors",
             route.active ? "text-gray-900 font-semibold" : "text-gray-500"
           )}
+          onClick={() => {
+            if (setShow) {
+              setShow(false);
+            }
+          }}
         >
           {route.label}
         </Link>

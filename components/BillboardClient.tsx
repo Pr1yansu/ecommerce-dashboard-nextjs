@@ -22,7 +22,7 @@ const BillboardClient: React.FC<Props> = ({ data }) => {
 
   return (
     <>
-      <div className="flex items-baseline justify-between">
+      <div className="flex items-baseline justify-between flex-wrap gap-4">
         <Heading
           title={`Billboards (${data.length})`}
           description="The billboard is the first thing your customers will see when they visit your store. Make sure it's a good one!"

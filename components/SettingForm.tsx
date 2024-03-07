@@ -41,7 +41,7 @@ const SettingForm: React.FC<Props> = ({ initialStore }) => {
   const onSubmit = async (values: FormValues) => {
     try {
       setLoading(true);
-      const res = await axios.patch(`/api/stores/${params.storeId}`, values);
+      await axios.patch(`/api/stores/${params.storeId}`, values);
       router.refresh();
       toast.success("Store Updated Successfully");
     } catch (error: any) {
@@ -75,7 +75,7 @@ const SettingForm: React.FC<Props> = ({ initialStore }) => {
   };
 
   return (
-    <>
+    <div className="p-4">
       <AlertModal
         isOpen={open}
         onClose={() => setOpen(false)}
@@ -135,7 +135,7 @@ const SettingForm: React.FC<Props> = ({ initialStore }) => {
         description={`${origin}/api/${params.storeId}`}
         variant="admin"
       />
-    </>
+    </div>
   );
 };
 

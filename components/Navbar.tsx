@@ -1,8 +1,7 @@
 import { UserButton, auth } from "@clerk/nextjs";
 import React from "react";
-import MainNav from "./MainNav";
-import StoreSwitcher from "./StoreSwitcher";
 import prisma from "@/lib/prismadb";
+import NavigationSection from "./Navigation-section";
 
 const Navbar = async () => {
   const { userId } = auth();
@@ -20,8 +19,7 @@ const Navbar = async () => {
   return (
     <header className="border-b">
       <nav className="flex py-4 px-8 items-center">
-        <StoreSwitcher items={stores} />
-        <MainNav className="mx-6" />
+        <NavigationSection stores={stores} />
         <div className="ml-auto flex items-center space-x-4">
           <UserButton afterSignOutUrl="/" />
         </div>

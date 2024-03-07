@@ -140,7 +140,7 @@ const ProductForm: React.FC<Props> = ({
         onConfirm={onDelete}
         loading={loading}
       />
-      <div className="flex items-center justify-between">
+      <div className="flex items-center justify-between flex-wrap gap-4">
         <Heading title={title} description={description} />
         {initialData && (
           <Button
@@ -182,7 +182,7 @@ const ProductForm: React.FC<Props> = ({
               </FormItem>
             )}
           />
-          <div className="grid grid-cols-3 gap-8">
+          <div className="grid md:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-8">
             <FormField
               control={form.control}
               name="name"

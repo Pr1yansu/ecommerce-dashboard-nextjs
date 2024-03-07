@@ -116,7 +116,7 @@ const BillBoardForm: React.FC<Props> = ({ initialData }) => {
         onConfirm={onDelete}
         loading={loading}
       />
-      <div className="flex items-center justify-between">
+      <div className="flex items-center justify-between flex-wrap gap-4">
         <Heading title={title} description={description} />
         {initialData && (
           <Button
@@ -156,7 +156,7 @@ const BillBoardForm: React.FC<Props> = ({ initialData }) => {
               </FormItem>
             )}
           />
-          <div className="grid grid-cols-3 gap-8">
+          <div className="grid md:grid-cols-3 gap-8 sm:grid-cols-2 grid-cols-1">
             <FormField
               control={form.control}
               name="label"

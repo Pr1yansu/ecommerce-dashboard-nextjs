@@ -101,7 +101,7 @@ const ColorsForm: React.FC<Props> = ({ initialData }) => {
         onConfirm={onDelete}
         loading={loading}
       />
-      <div className="flex items-center justify-between">
+      <div className="flex items-center justify-between flex-wrap gap-4">
         <Heading title={title} description={description} />
         {initialData && (
           <Button
@@ -120,7 +120,7 @@ const ColorsForm: React.FC<Props> = ({ initialData }) => {
           onSubmit={form.handleSubmit(onSubmit)}
           className="space-y-4 py-2 pb-4 w-full"
         >
-          <div className="grid grid-cols-3 gap-8">
+          <div className="grid md:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-8">
             <FormField
               control={form.control}
               name="name"

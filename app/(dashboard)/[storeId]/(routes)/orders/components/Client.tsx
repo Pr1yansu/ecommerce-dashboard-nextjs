@@ -13,7 +13,7 @@ interface Props {
 const OrderClient: React.FC<Props> = ({ data }) => {
   return (
     <>
-      <div className="flex items-baseline justify-between">
+      <div className="flex items-baseline justify-between flex-wrap gap-4">
         <Heading
           title={`Orders (${data.length})`}
           description="Manage your orders here."

@@ -43,7 +43,7 @@ export const ApiAlert: React.FC<ApiAlertProps> = ({
           </Badge>
         </div>
       </AlertTitle>
-      <AlertDescription className="my-2 flex justify-between items-center">
+      <AlertDescription className="my-2 flex justify-between items-center flex-wrap gap-2">
         <code
           className="
             relative
@@ -53,6 +53,8 @@ export const ApiAlert: React.FC<ApiAlertProps> = ({
             py-[0.2rem]
             text-xs
             font-semibold
+            whitespace-pre-wrap
+            break-all
         "
         >
           {description}
